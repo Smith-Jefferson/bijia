@@ -27,7 +27,7 @@ public class JdSpiderExecuter extends TimerTask {
 		if(!mValue.getDbState()&&mValue.getmSqlUtil()!=null){
 			mValue.getmSqlUtil().deleteAll(table);	//清空数据库
 		}
-		JdFetcher.fetchQueue(mQueue,no);
+		JdFetcher.fetchQueue(mQueue);
 	}
 
 }

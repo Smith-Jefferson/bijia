@@ -74,7 +74,7 @@ public class JsoupUtil {
 	
 	
 	
-	public static void ExcuteItemQueue(String oneListUrl,int no){
+	public static void ExcuteItemQueue(String oneListUrl){
 		//初始化信息，item列表Itemlist，分页div的class，内容列表的div的class
 		int a=1;
 		LinkedBlockingQueue<String> Itemlist=new LinkedBlockingQueue<String>(Integer.MAX_VALUE);
@@ -126,7 +126,6 @@ public class JsoupUtil {
 //						System.out.print("获取商品："+item.getName()+"\n");
 						if(mValue.getmSqlUtil()!=null){
 							mValue.getmSqlUtil().addItem(item,mConstants.JD_TABLE);
-							System.out.println("来自线程："+no);
 						}else{
 							System.out.print("获取数据库实例失败！");
 						}
@@ -142,7 +141,7 @@ public class JsoupUtil {
 			
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("解析list："+oneListUrl+"时出错！");
 			e.printStackTrace();
 		}
 		
