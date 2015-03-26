@@ -13,10 +13,12 @@ public class JdSpiderExecuter extends TimerTask {
 	private String url;
 	private static String table=mConstants.JD_TABLE;
 	private Queue<String> mQueue;
+	private int no;
 	
 	public JdSpiderExecuter(String url,Queue<String> mQueue){	
 		this.url=url;
 		this.mQueue = mQueue;
+		this.no = ++mValue.threadNo;
 	}
 	
 	@Override
@@ -25,7 +27,7 @@ public class JdSpiderExecuter extends TimerTask {
 		if(!mValue.getDbState()&&mValue.getmSqlUtil()!=null){
 			mValue.getmSqlUtil().deleteAll(table);	//清空数据库
 		}
-		JdFetcher.fetchQueue(mQueue);
+		JdFetcher.fetchQueue(mQueue,no);
 	}
 
 }

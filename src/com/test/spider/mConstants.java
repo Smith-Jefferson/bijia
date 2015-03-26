@@ -7,5 +7,5 @@ public class mConstants {
 	public static final String DB_NAME = "spiderDB";
 	public static final String DB_USER_NAME = "root";
 	public static final String DB_USER_PASS = "root";
-	public static final int THREAD_SIZE = 50;
+	public static final int THREAD_SIZE = 80;
 }

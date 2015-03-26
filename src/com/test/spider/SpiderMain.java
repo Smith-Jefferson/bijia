@@ -20,6 +20,7 @@ public class SpiderMain {
 		SqlUtil mSqlUtil = new SqlUtil(mConstants.DB_NAME,mConstants.DB_USER_NAME,mConstants.DB_USER_PASS);
 		mValue.setmSqlUtil(mSqlUtil);
 		mArrayList = JsoupUtil.praseArray(mConstants.JD_MAP_URL);
+		mValue.totleNum=mArrayList.size();
 		treadQueues = ThreadCarveUtil.Carve(mArrayList);
 		for (Queue<String> mQueue:treadQueues){
 			new Thread(new SpiderTask(jdMapUrl,mQueue)
