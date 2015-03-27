@@ -124,7 +124,7 @@ public class JsoupUtil {
 					if (!BloomFilter.ifNotContainsSet(url)) {
 						Item item =	FetchItemUtil.getJDItemInfo(url);
 //						System.out.print("获取商品："+item.getName()+"\n");
-						if(mValue.getmSqlUtil()!=null){
+						if(mValue.getmSqlUtil()!=null && item != null){
 							mValue.getmSqlUtil().addItem(item,mConstants.JD_TABLE);
 						}else{
 							System.out.print("获取数据库实例失败！");
