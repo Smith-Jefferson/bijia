@@ -19,7 +19,7 @@ public class FetchItemUtil {
 	{ 
 		Document doc;
 		String host = "www.jd.com";
-		Item currentItem=new Item();
+		Item currentItem = null;
 		String itemID;
 		try 
 		{		
