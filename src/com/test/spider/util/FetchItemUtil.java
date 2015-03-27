@@ -28,10 +28,11 @@ public class FetchItemUtil {
             currentItem = new Item(getJDItemName(doc),host,itemID,getJDItemPrice(itemID),
             		getJDItemCategory(doc),url,getJDItemImageUrl(doc),getJDItemDetail(doc)
     				);
+//            System.out.println(currentItem);
 		}
-		catch (IOException e) 
+		catch (Exception e) 
 		{
-			System.out.println("获取Item时发生错误");
+			System.out.println("获取Item时"+url+"发生错误");
 			e.printStackTrace();
 			return null;
 		}
@@ -81,7 +82,6 @@ public class FetchItemUtil {
         	{
         		itemCategory.add(itemCategoryInfo);
         	}
-        	
         }
         return itemCategory;
 	}

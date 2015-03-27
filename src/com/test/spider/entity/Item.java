@@ -21,13 +21,16 @@ public class Item {
 	
 	public Item(String name,String host,String id,String price,	//完整构造器
 			ArrayList<String> catgory,String url,String imageUrl,String description){
-		setName(name);
+		setName(removeQuo(name));
 		setHost(host);
 		setId(id);
 		setPrice(price);
 		setUrl(url);
 		setImageUrl(imageUrl);
-		setDescription(description);
+		setDescription(removeQuo(description));
+		for(int i = 0;i<catgory.size();i++){
+			catgory.set(i, removeQuo(catgory.get(i)));
+		}
 		adaptCatgory(catgory);
 	}
 	
@@ -63,6 +66,12 @@ public class Item {
 			setCatThird(Catgory.get(2));
 			break;
 		}
+	}
+
+	private String removeQuo(String str){
+		String rep = new String (str);
+		rep = rep.replace("'", "''");
+		return rep;
 	}
 	
 	public String getName() {

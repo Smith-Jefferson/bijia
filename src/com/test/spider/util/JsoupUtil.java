@@ -19,6 +19,9 @@ import com.test.spider.mValue;
 import com.test.spider.entity.Item;
 
 public class JsoupUtil {
+	
+	public static final int MAX_ITA = 3;
+	
 	public static LinkedHashMap<String,String> prase(String url){ 
 		LinkedHashMap<String,String> mMap = new LinkedHashMap<String,String>();
 		try {
@@ -76,6 +79,7 @@ public class JsoupUtil {
 	
 	public static void ExcuteItemQueue(String oneListUrl){
 		//初始化信息，item列表Itemlist，分页div的class，内容列表的div的class
+		int tryNum = 0;
 		LinkedBlockingQueue<String> Itemlist=new LinkedBlockingQueue<String>(Integer.MAX_VALUE);
 		String[] classString={"goods-list-v1","plist"};
 		String[] removeString={"页",".","确定"};
@@ -86,8 +90,12 @@ public class JsoupUtil {
 		try {
 			//获取item页，总共有多少页
 			Document doc = Jsoup.connect(oneListUrl).get();
-			while(doc.select("body").hasText()==false){
+			while(!doc.select("body").hasText()&&tryNum++<MAX_ITA){
 				doc = Jsoup.connect(oneListUrl).get(); //如果页面没有抓全，重新抓取
+			}
+			if(tryNum==MAX_ITA){
+				System.out.println("获取list："+oneListUrl+"超过"+MAX_ITA+"次未响应！");
+				return;
 			}
 			String page = "";
 			int Urlend = 1;
@@ -126,8 +134,10 @@ public class JsoupUtil {
 					String url=Itemlist.poll();
 					if (!BloomFilter.ifNotContainsSet(url)) {
 						Item item =	FetchItemUtil.getJDItemInfo(url);
-//						System.out.print("获取商品："+item.getName()+"\n");
-						if(mValue.getmSqlUtil()!=null && item != null){
+						if(item==null){
+							continue;
+						}
+						if(mValue.getmSqlUtil()!=null){
 							mValue.getmSqlUtil().addItem(item,mConstants.JD_TABLE);
 						}else{
 							System.out.print("获取数据库实例失败！");
