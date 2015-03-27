@@ -87,6 +87,9 @@ public class JsoupUtil {
 		try {
 			//获取item页，总共有多少页
 			Document doc = Jsoup.connect(oneListUrl).get();
+			while(doc.select("body").hasText()==false){
+				doc = Jsoup.connect(oneListUrl).get(); //如果页面没有抓全，重新抓取
+			}
 			String page = "";
 			int Urlend = 1;
 			Elements elements=null;
@@ -103,11 +106,12 @@ public class JsoupUtil {
 				
 			}
 			
+			Elements listlink=new Elements();
 			for (int i=0;i<links.size();i++) {
-				if(links.get(i).text().contains(removeString[0])||links.get(i).text().contains(removeString[1]))
-					links.remove(i);
+				if(!links.get(i).text().contains(removeString[0])&&!links.get(i).text().contains(removeString[1])&&!links.get(i).text().contains(removeString[2]))
+					listlink.add(links.get(i));
 			}
-			Urlend=Integer.parseInt(links.last().text().trim());
+			Urlend=Integer.parseInt(listlink.last().text().trim());
 			
 			//获得第一页的item的url列表
 			Itemlist=GetItemList(null, doc, classString);
@@ -176,18 +180,15 @@ public class JsoupUtil {
 			else {
 				doc=document;
 			}
-			int i=0;
 			Elements links =null;
-			while (i<=classString.length ) {
-				++i;
-				links= doc.getElementsByClass(classString[i]).select("a[href]");
-				if (links==null||links.isEmpty()) {
-					links = doc.getElementById("plist").select("a[href]");
-				}
+			for (int j = 0; j < classString.length; j++) {
+				links= doc.getElementsByClass(classString[j]).select("a[href]");
 				if (links !=null && !links.isEmpty()) {
 					break;
 				}
-			
+			}
+			if (links ==null || links.isEmpty()) {
+				links=doc.select("a[href]");
 			}
             for (Element link : links) { 
             	if(ListFilter.UrlJudge(link.attr("abs:href"), ListFilter.ITEM)){
