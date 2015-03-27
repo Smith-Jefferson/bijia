@@ -76,10 +76,9 @@ public class JsoupUtil {
 	
 	public static void ExcuteItemQueue(String oneListUrl){
 		//初始化信息，item列表Itemlist，分页div的class，内容列表的div的class
-		int a=1;
 		LinkedBlockingQueue<String> Itemlist=new LinkedBlockingQueue<String>(Integer.MAX_VALUE);
 		String[] classString={"goods-list-v1","plist"};
-		String[] removeString={"页","."};
+		String[] removeString={"页",".","确定"};
 		Map<String, String> pageclass=new HashMap<String, String>();
 		pageclass.put("p-num", "page=");
 		pageclass.put("pagin", "p=");
