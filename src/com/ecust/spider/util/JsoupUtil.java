@@ -1,4 +1,4 @@
-package com.test.spider.util;
+package com.ecust.spider.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,9 +14,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.test.spider.mConstants;
-import com.test.spider.mValue;
-import com.test.spider.entity.Item;
+import com.ecust.spider.mConstants;
+import com.ecust.spider.mValue;
+import com.ecust.spider.entity.Item;
 
 public class JsoupUtil {
 	

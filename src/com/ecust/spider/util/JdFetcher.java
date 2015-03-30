@@ -1,8 +1,8 @@
-package com.test.spider.util;
+package com.ecust.spider.util;
 
 import java.util.Queue;
 
-import com.test.spider.mValue;
+import com.ecust.spider.mValue;
 
 public class JdFetcher {
 	public static void fetchQueue(Queue<String> mQueue){

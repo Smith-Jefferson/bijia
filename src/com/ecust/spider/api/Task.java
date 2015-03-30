@@ -1,4 +1,4 @@
-package com.test.spider.api;
+package com.ecust.spider.api;
 
 public interface Task extends Runnable {
 

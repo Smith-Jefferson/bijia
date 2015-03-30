@@ -1,10 +1,10 @@
-package com.test.spider.util;
+package com.ecust.spider.util;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import com.test.spider.mConstants;
+import com.ecust.spider.mConstants;
 
 public class ThreadCarveUtil {
 	

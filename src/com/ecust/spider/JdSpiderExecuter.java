@@ -1,12 +1,12 @@
-package com.test.spider;
+package com.ecust.spider;
 
 import java.util.Queue;
 import java.util.TimerTask;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.test.spider.util.BloomFilter;
-import com.test.spider.util.JdFetcher;
-import com.test.spider.util.JsoupUtil;
+import com.ecust.spider.util.BloomFilter;
+import com.ecust.spider.util.JdFetcher;
+import com.ecust.spider.util.JsoupUtil;
 
 public class JdSpiderExecuter extends TimerTask {
 	//京东专用爬去线程

@@ -1,4 +1,4 @@
-package com.test.spider.util;
+package com.ecust.spider.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.test.spider.entity.*;
+import com.ecust.spider.entity.*;
 
 public class FetchItemUtil {
 	

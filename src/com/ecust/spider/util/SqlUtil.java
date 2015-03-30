@@ -1,4 +1,4 @@
-package com.test.spider.util;
+package com.ecust.spider.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.test.spider.mValue;
-import com.test.spider.entity.Item;
+import com.ecust.spider.mValue;
+import com.ecust.spider.entity.Item;
 
 public class SqlUtil {
 	
@@ -40,7 +40,7 @@ public class SqlUtil {
 		  		+"','"+item.getUrl()+"','"+item.getImageUrl()+"','"+item.getDescription()+"')";
 		try {
 			stmt.execute(sql);
-			System.out.println(item.getName()+"已写入数据库");
+			System.out.println(++mValue.count+item.getName()+"已写入数据库");
 			if(mValue.getDbState()){
 				mValue.setDbState(false);
 			}

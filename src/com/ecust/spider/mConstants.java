@@ -1,4 +1,4 @@
-package com.test.spider;
+package com.ecust.spider;
 
 public class mConstants {
 	//此类保存常数

@@ -1,6 +1,6 @@
-package com.test.spider;
+package com.ecust.spider;
 
-import com.test.spider.util.SqlUtil;
+import com.ecust.spider.util.SqlUtil;
 
 public class mValue {
 	//此类保存运行状态

@@ -1,13 +1,13 @@
-package com.test.spider;
+package com.ecust.spider;
 
 
 import java.util.ArrayList;
 import java.util.Queue;
 
-import com.test.spider.util.JsoupUtil;
-import com.test.spider.util.SpiderTask;
-import com.test.spider.util.SqlUtil;
-import com.test.spider.util.ThreadCarveUtil;
+import com.ecust.spider.util.JsoupUtil;
+import com.ecust.spider.util.SpiderTask;
+import com.ecust.spider.util.SqlUtil;
+import com.ecust.spider.util.ThreadCarveUtil;
 
 public class SpiderMain {
 	

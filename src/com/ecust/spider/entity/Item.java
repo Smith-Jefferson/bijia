@@ -1,4 +1,4 @@
-package com.test.spider.entity;
+package com.ecust.spider.entity;
 
 import java.util.ArrayList;
 

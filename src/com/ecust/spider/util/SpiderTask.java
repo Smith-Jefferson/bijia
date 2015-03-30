@@ -1,4 +1,4 @@
-package com.test.spider.util;
+package com.ecust.spider.util;
 
 
 import java.util.Calendar;
@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.Queue;
 import java.util.Timer;
 
-import com.test.spider.JdSpiderExecuter;
-import com.test.spider.api.Task;
+import com.ecust.spider.JdSpiderExecuter;
+import com.ecust.spider.api.Task;
 
 public class SpiderTask implements Task {
 	private String url;
