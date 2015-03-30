@@ -133,8 +133,8 @@ public class JsoupUtil {
 				while (! Itemlist.isEmpty()) {
 					String url=Itemlist.poll();
 					if (!BloomFilter.ifNotContainsSet(url)) {
-						Item item =	FetchItemUtil.getJDItemInfo(url);
-						if(item==null){
+						Item item =	FetchItemUtil.getJDItemInfo(url,3);
+						if(item.getId()==null){
 							continue;
 						}
 						if(mValue.getmSqlUtil()!=null){

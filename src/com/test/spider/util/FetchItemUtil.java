@@ -13,13 +13,13 @@ import org.jsoup.select.Elements;
 import com.test.spider.entity.*;
 
 public class FetchItemUtil {
-	
 	//获得京东商品信息
-	public static  Item getJDItemInfo(String url)
-	{ 
+	public static  Item getJDItemInfo(String url,int tryTime)
+	{
+		tryTime--;
 		Document doc;
 		String host = "www.jd.com";
-		Item currentItem = null;
+		Item currentItem=new Item();
 		String itemID;
 		try 
 		{		
@@ -28,13 +28,23 @@ public class FetchItemUtil {
             currentItem = new Item(getJDItemName(doc),host,itemID,getJDItemPrice(itemID),
             		getJDItemCategory(doc),url,getJDItemImageUrl(doc),getJDItemDetail(doc)
     				);
-//            System.out.println(currentItem);
+            
 		}
 		catch (Exception e) 
 		{
-			System.out.println("获取Item时"+url+"发生错误");
-			e.printStackTrace();
-			return null;
+			if(tryTime>=0)
+			{
+				System.out.println("重新获取item信息,url为"+url+"item"+currentItem.toString());
+				return getJDItemInfo(url,tryTime);
+			}
+			else
+			{
+				System.out.println("获取Item失败，url为"+url+"item"+currentItem.toString());
+				e.printStackTrace();
+				return null;
+			}
+			
+			
 		}
 		return currentItem;
 	}
@@ -42,9 +52,19 @@ public class FetchItemUtil {
 	//获得商品名
 	private static String getJDItemName(Element doc)
 	{
-		 Elements ItemInfo = doc.select("div.m-item-inner").select("div#itemInfo");
-         Elements ItemNameElements=ItemInfo.select("div#name");
-         return ItemNameElements.first().text();
+		 Elements ItemInfo = doc.select("div.m-item-inner").select("div#itemInfo").select("div#name").select("h1");
+		 if(ItemInfo.size()!=0)
+		 {
+			 return ItemInfo.text().replace('\'','_');
+		 }
+		
+		 ItemInfo=doc.select("div#product-intro").select("div#name").select("h1");
+		 if(ItemInfo.size()!=0)
+		 {
+			 return ItemInfo.text().replace('\'','_');
+		 }
+		
+         return null;
 	}
 	
 	
@@ -52,22 +72,65 @@ public class FetchItemUtil {
 	private	static String getJDItemImageUrl(Element doc)
 	{
 		 Elements ImgInfo = doc.select("div#preview").select("div.jqzoom").select("img[src]");
-		 return ImgInfo.first().attr("src");
+		 if(ImgInfo.size()!=0)
+		 {
+			 return ImgInfo.first().attr("src");
+		 }
+		 ImgInfo = doc.select("div#preview").select("div#spec-n1").select("img[src]");
+		 if(ImgInfo.size()!=0)
+		 {
+			 return ImgInfo.first().attr("src");
+		 }
+		 return null;
+		 
 	}
 	
 	//商品ID
 	private	static String getJDItemID(Element doc)
 	{
-		return doc.select("div.m-item-inner").select("div#summary-price").select("div.dd").select("a[data-sku]").attr("data-sku");
+		Elements idElement= doc.select("div.m-item-inner").select("div#summary-price").select("div.dd").select("a[data-sku]");
+		String id=null;
+		if(idElement.size()==0)
+		{
+			idElement= doc.select("div.clearfix").select("div.dd").select("a[data-sku]");
+		}
+		if(idElement.size()!=0)
+		{
+			id=idElement.attr("data-sku");
+		}
+		
+		if(id!="")
+		{
+			return id;
+		}
+		else
+		{
+			return null;
+		}
+		
 	}
 	
 	//商品价格
 	private	static String getJDItemPrice(String itemID)
 	{
-		String price=new FechUtil().getUrl("http://p.3.cn/prices/get?skuid=J_"+itemID+"&tpye=1");
-        price=price.substring(1,price.length()-2);
-        JSONObject jsonObject=JSONObject.fromObject(price);
-        return jsonObject.get("p").toString();
+		if(itemID==null)
+		{
+			return null;
+		}
+		String price=null;
+		if(!itemID.isEmpty())
+		{
+			price=new FechUtil().getUrl("http://p.3.cn/prices/get?skuid=J_"+itemID+"&tpye=1");
+		}
+		
+		if(price.length()>1)
+		{
+			price=price.substring(1,price.length()-2);
+	        JSONObject jsonObject=JSONObject.fromObject(price);
+	        return jsonObject.get("p").toString();
+		}
+		return null;
+        
 	}
 	
 	//商品类别
@@ -75,13 +138,19 @@ public class FetchItemUtil {
 	{
 		ArrayList<String> itemCategory=new ArrayList<String>();
         Elements categoryInfo = doc.select("div.breadcrumb").select("a[clstag]");
+        if(categoryInfo.size()==0)
+        {
+        	categoryInfo = doc.select("div.breadcrumb").select("a[href]");
+        }
         for(Element category : categoryInfo)
         {
         	String itemCategoryInfo=category.text();
         	if(itemCategoryInfo!=null)
         	{
+        		itemCategoryInfo=itemCategoryInfo.replace('\'','_');
         		itemCategory.add(itemCategoryInfo);
         	}
+        	
         }
         return itemCategory;
 	}
@@ -91,9 +160,14 @@ public class FetchItemUtil {
 	{
 		ArrayList<String> detail=new ArrayList<String>();
 		Elements detailList=doc.select("ul.p-parameter-list");
+		if(detailList.size()==0)
+        {
+			detailList = doc.select("div#product-detail-1").select("div.p-parameter").select("ui.p-parameter-list");
+        }
 		for(Element detailInfo : detailList)
 		{
 			String Detail=detailInfo.text();
+			Detail=Detail.replace('\'','_');
 			detail.add(Detail);
 		}
 		return detail.toString();
