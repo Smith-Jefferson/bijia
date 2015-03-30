@@ -43,8 +43,6 @@ public class FetchItemUtil {
 				e.printStackTrace();
 				return null;
 			}
-			
-			
 		}
 		return currentItem;
 	}

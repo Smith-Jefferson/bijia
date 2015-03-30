@@ -75,6 +75,29 @@ public class JsoupUtil {
 		return mQueue; 
 	}
 	
+	public static ArrayList<String> praseYHDArray(String url){
+		ArrayList<String> mQueue = new ArrayList<String>();
+		try {
+            Document doc = Jsoup.connect(url).get(); 
+            Elements lists = doc.getElementsByTag("em");
+            Elements links = lists.select("span").select("a[href]"); 
+            for (Element link : links) { 
+            	if(link.attr("abs:href").startsWith("http://list.yhd.com")){
+            		mQueue.add(link.attr("abs:href"));
+            	}
+            }  
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mQueue; 
+	}
+	
+	public static void main(String[] args){
+		ArrayList<String> mArrayList = praseYHDArray("http://www.yhd.com/marketing/allproduct.html");
+		System.out.print(mArrayList);
+	}
+	
 	
 	
 	public static void ExcuteItemQueue(String oneListUrl){
@@ -134,10 +157,7 @@ public class JsoupUtil {
 					String url=Itemlist.poll();
 					if (!BloomFilter.ifNotContainsSet(url)) {
 						Item item =	FetchItemUtil.getJDItemInfo(url,3);
-						if(item.getId()==null){
-							continue;
-						}
-						if(mValue.getmSqlUtil()!=null){
+						if(mValue.getmSqlUtil()!=null||item.getId()==null){
 							mValue.getmSqlUtil().addItem(item,mConstants.JD_TABLE);
 						}else{
 							System.out.print("获取数据库实例失败！");

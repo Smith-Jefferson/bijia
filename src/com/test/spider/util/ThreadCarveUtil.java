@@ -8,7 +8,44 @@ import com.test.spider.mConstants;
 
 public class ThreadCarveUtil {
 	
-	public static ArrayList<Queue<String>> Carve(ArrayList<String> queue){
+	public static final int SIZE = 0;
+	public static final int NUM = 1;
+	
+	public static ArrayList<Queue<String>> Carve(ArrayList<String> queue,int mode){
+		
+		switch(mode){
+		case SIZE:
+			return carveBySize(queue);
+		case NUM:
+			return carveByNum(queue);
+		default:
+			return null;
+		}
+	}
+	
+	public static ArrayList<Queue<String>> carveByNum(ArrayList<String> queue){
+		ArrayList<Queue<String>> queues  = new ArrayList<Queue<String>>();
+		int threadNum = mConstants.THREAD_NUM;
+		if(queue.size()/threadNum==0){
+			Queue<String> tempQueue = new LinkedList<String> (queue);
+			queues.add(tempQueue);
+			return queues;
+		}
+		int threadSize = queue.size()/threadNum+1;
+		for(int i=0;i<threadNum;i++){
+			if(queue.size()>=(i+1)*threadSize-1){
+			Queue<String> tempQueue = new LinkedList<String> ( queue.subList(i*threadSize, (i+1)*threadSize-1));
+			queues.add(tempQueue);
+			}else{
+				Queue<String> tempQueue = new LinkedList<String> ( queue.subList(i*threadSize,queue.size()-1));
+				queues.add(tempQueue);
+				break;
+			}
+		}
+		return queues;
+	}
+	
+	public static ArrayList<Queue<String>> carveBySize(ArrayList<String> queue){
 		
 		int threadSize = mConstants.THREAD_SIZE;
 		ArrayList<Queue<String>> queues  = new ArrayList<Queue<String>>();
