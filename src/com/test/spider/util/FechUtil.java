@@ -17,10 +17,15 @@ import org.jsoup.nodes.Document;
 public class FechUtil {
 	 static String htm_str;
 	private HttpClient hc;
-
+	final static int tryNum=3;
+	private int mtryTime;
 	public String getUrl(String url){
+		return getUrl(url,tryNum);
+	}
+	public String getUrl(String url,int tryTime){
+		mtryTime = tryTime;
 		 try{
-		      hc = HttpClients.createDefault();;
+		      hc = HttpClients.createDefault();
 		      HttpGet hg = new HttpGet(url);
 		      HttpResponse response = hc.execute(hg);
 				if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
@@ -33,6 +38,10 @@ public class FechUtil {
 					htm_str = new String(outStream.toByteArray(), "gb2312");
 				}
 			  }catch (Exception e) {  
+				  if(--mtryTime>=0){
+					  System.out.println("获取价格："+url+"时失败，剩余重试次数"+mtryTime+1);
+					  return getUrl(url,mtryTime);
+				  }else
 				  e.printStackTrace();
 			     }
 		return htm_str;

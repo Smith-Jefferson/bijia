@@ -26,6 +26,7 @@ public class SpiderMain {
 //		treadQueues = ThreadCarveUtil.Carve(mArrayListJD,ThreadCarveUtil.SIZE);
 		treadQueues = ThreadCarveUtil.Carve(mArrayListJD,ThreadCarveUtil.NUM);
 		for (Queue<String> mQueue:treadQueues){
+			System.out.println(mQueue.size());
 			new Thread(new SpiderTask(jdMapUrl,mQueue)
 			{}){}.start();
 		}

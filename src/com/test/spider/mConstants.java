@@ -8,6 +8,6 @@ public class mConstants {
 	public static final String DB_NAME = "spiderdb";
 	public static final String DB_USER_NAME = "root";
 	public static final String DB_USER_PASS = "root";
-	public static final int THREAD_SIZE = 80;
-	public static final int THREAD_NUM = 10;
+	public static final int THREAD_SIZE = 90;
+	public static final int THREAD_NUM = 15;
 }

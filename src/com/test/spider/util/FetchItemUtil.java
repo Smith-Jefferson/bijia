@@ -13,7 +13,14 @@ import org.jsoup.select.Elements;
 import com.test.spider.entity.*;
 
 public class FetchItemUtil {
+	
+	private final static int tryNum = 3;
+	
 	//获得京东商品信息
+	public static  Item getJDItemInfo(String url){
+		return getJDItemInfo(url,tryNum);
+	}
+	
 	public static  Item getJDItemInfo(String url,int tryTime)
 	{
 		tryTime--;
@@ -34,7 +41,7 @@ public class FetchItemUtil {
 		{
 			if(tryTime>=0)
 			{
-				System.out.println("重新获取item信息,url为"+url+"item"+currentItem.toString());
+				System.out.println("重新获取item信息,url为"+url+"item"+currentItem.toString()+" 剩余次数："+(tryTime+1));
 				return getJDItemInfo(url,tryTime);
 			}
 			else

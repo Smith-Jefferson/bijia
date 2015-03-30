@@ -21,6 +21,7 @@ import com.test.spider.entity.Item;
 public class JsoupUtil {
 	
 	public static final int MAX_ITA = 3;
+	public static final int tryNum = 3;
 	
 	public static LinkedHashMap<String,String> prase(String url){ 
 		LinkedHashMap<String,String> mMap = new LinkedHashMap<String,String>();
@@ -99,9 +100,13 @@ public class JsoupUtil {
 	}
 	
 	
-	
 	public static void ExcuteItemQueue(String oneListUrl){
+		ExcuteItemQueue(oneListUrl,tryNum);
+	}
+	
+	public static void ExcuteItemQueue(String oneListUrl,int tryTime){
 		//初始化信息，item列表Itemlist，分页div的class，内容列表的div的class
+		int mTryTime = tryTime;
 		int tryNum = 0;
 		LinkedBlockingQueue<String> Itemlist=new LinkedBlockingQueue<String>(Integer.MAX_VALUE);
 		String[] classString={"goods-list-v1","plist"};
@@ -174,7 +179,10 @@ public class JsoupUtil {
 			
 			
 		} catch (Exception e) {
-			System.out.println("解析list："+oneListUrl+"时出错！");
+			if(--mTryTime>=0){
+				System.out.println("解析list："+oneListUrl+"时出错！,剩余次数"+(mTryTime+1));
+				ExcuteItemQueue(oneListUrl,mTryTime);
+			}else
 			e.printStackTrace();
 		}
 		
