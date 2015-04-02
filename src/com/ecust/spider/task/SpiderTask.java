@@ -1,4 +1,4 @@
-package com.ecust.spider.util;
+package com.ecust.spider.task;
 
 
 import java.util.Calendar;
@@ -6,15 +6,17 @@ import java.util.Date;
 import java.util.Queue;
 import java.util.Timer;
 
-import com.ecust.spider.JdSpiderExecuter;
 import com.ecust.spider.api.Task;
 
 public class SpiderTask implements Task {
-	private String url;
-	private Queue<String> queue;
-	public SpiderTask(String url,Queue<String> queue){
-		this.url=url;
-		this.queue = queue;
+	private int type;
+	
+	public static final int JD = 0;
+	public static final int YHD = 1;
+	
+	
+	public SpiderTask(int type){
+		this.type = type;
 	}
 	@Override
 	public void run() {
@@ -36,7 +38,17 @@ public class SpiderTask implements Task {
 		Date time = calendar.getTime();
 
 		Timer timer = new Timer();
-	    timer.schedule(new JdSpiderExecuter(url,queue), time);
+		
+		switch(type){
+		case JD:
+	    timer.schedule(new DailyJdTask(), time);
+	    break;
+		case YHD:
+		    timer.schedule(new DailyJdTask(), time);
+		    break;
+		 default:
+			 break;
+		}
 	}
 
 }

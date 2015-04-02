@@ -1,24 +1,23 @@
-package com.ecust.spider;
+package com.ecust.spider.task;
 
 import java.util.Queue;
 import java.util.TimerTask;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import com.ecust.spider.mConstants;
+import com.ecust.spider.mValue;
+import com.ecust.spider.api.Task;
 import com.ecust.spider.util.BloomFilter;
 import com.ecust.spider.util.JdFetcher;
 import com.ecust.spider.util.JsoupUtil;
 
-public class JdSpiderExecuter extends TimerTask {
+public class JdSpiderExecuter implements Task {
 	//京东专用爬去线程
-	private String url;
 	private static String table=mConstants.JD_TABLE;
 	private Queue<String> mQueue;
-	private int no;
 	
-	public JdSpiderExecuter(String url,Queue<String> mQueue){	
-		this.url=url;
+	public JdSpiderExecuter(Queue<String> mQueue){	
 		this.mQueue = mQueue;
-		this.no = ++mValue.threadNo;
 	}
 	
 	@Override
