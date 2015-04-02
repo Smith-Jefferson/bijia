@@ -11,33 +11,15 @@ import com.ecust.spider.util.ThreadCarveUtil;
 
 public class SpiderMain {
 	
-	final static String jdMapUrl = mConstants.JD_MAP_URL;
-	static  String htm_str;
-	static String html;
-	static ArrayList<String> mArrayListJD;
-	static ArrayList<String> mArrayListYHD;
-	static ArrayList<Queue<String>> treadQueues;
 	public static void main(String[] args) {
 		SqlUtil mSqlUtil = new SqlUtil(mConstants.DB_NAME,mConstants.DB_USER_NAME,mConstants.DB_USER_PASS);
 		mValue.setmSqlUtil(mSqlUtil);
 		
-		new Thread(new SpiderTask(SpiderTask.JD)
+		new Thread(new SpiderTask(mConstants.JD)
 		{}){}.start();
 		
-//		new Thread(new SpiderTask(SpiderTask.YHD)
-//		{}){}.start();
+		new Thread(new SpiderTask(mConstants.YHD)
+		{}){}.start();
 		
-//		mArrayListJD = JsoupUtil.praseArray(mConstants.JD_MAP_URL);
-//		mArrayListYHD = JsoupUtil.praseYHDArray(mConstants.YHD_MAP_URL);
-////		System.out.println(mArrayListYHD);
-//		mValue.totleNum=mArrayListJD.size();
-////		treadQueues = ThreadCarveUtil.Carve(mArrayListJD,ThreadCarveUtil.SIZE);
-//		treadQueues = ThreadCarveUtil.Carve(mArrayListJD,ThreadCarveUtil.NUM);
-//		for (Queue<String> mQueue:treadQueues){
-//			System.out.println(mQueue.size());
-//			new Thread(new SpiderTask(SpiderTask.JD)
-//			{}){}.start();
-//		}
-//		treadQueues = null;
 	}
 }

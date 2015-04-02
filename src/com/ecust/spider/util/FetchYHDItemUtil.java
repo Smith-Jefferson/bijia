@@ -145,7 +145,7 @@ public class FetchYHDItemUtil
 		{
 			for(Element info : categoryInfo)
 			{
-				categoryList.add(info.text().replace('\'','_'));
+				categoryList.add(info.textNodes().get(0).text());
 			}
 			return categoryList;
 		}

@@ -6,13 +6,12 @@ import java.util.Date;
 import java.util.Queue;
 import java.util.Timer;
 
+import com.ecust.spider.mConstants;
 import com.ecust.spider.api.Task;
 
 public class SpiderTask implements Task {
 	private int type;
 	
-	public static final int JD = 0;
-	public static final int YHD = 1;
 	
 	
 	public SpiderTask(int type){
@@ -39,16 +38,7 @@ public class SpiderTask implements Task {
 
 		Timer timer = new Timer();
 		
-		switch(type){
-		case JD:
-	    timer.schedule(new DailyJdTask(), time);
-	    break;
-		case YHD:
-		    timer.schedule(new DailyJdTask(), time);
-		    break;
-		 default:
-			 break;
+	    timer.schedule(new DailyTask(type), time);
+
 		}
 	}
-
-}
