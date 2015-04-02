@@ -161,7 +161,7 @@ public class JsoupUtil {
 				while (! Itemlist.isEmpty()) {
 					String url=Itemlist.poll();
 					if (!BloomFilter.ifNotContainsSet(url)) {
-						Item item =	FetchItemUtil.getJDItemInfo(url,3);
+						Item item =	FetchJDItemUtil.getJDItemInfo(url,3);
 						if(mValue.getmSqlUtil()!=null||item.getId()==null){
 							mValue.getmSqlUtil().addItem(item,mConstants.JD_TABLE);
 						}else{

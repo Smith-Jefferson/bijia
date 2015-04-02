@@ -12,7 +12,7 @@ import org.jsoup.select.Elements;
 
 import com.ecust.spider.entity.*;
 
-public class FetchItemUtil {
+public class FetchJDItemUtil {
 	
 	private final static int tryNum = 3;
 	

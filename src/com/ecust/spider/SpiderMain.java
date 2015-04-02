@@ -21,7 +21,8 @@ public class SpiderMain {
 		SqlUtil mSqlUtil = new SqlUtil(mConstants.DB_NAME,mConstants.DB_USER_NAME,mConstants.DB_USER_PASS);
 		mValue.setmSqlUtil(mSqlUtil);
 		mArrayListJD = JsoupUtil.praseArray(mConstants.JD_MAP_URL);
-		mArrayListYHD = JsoupUtil.praseArray(mConstants.YHD_MAP_URL);
+		mArrayListYHD = JsoupUtil.praseYHDArray(mConstants.YHD_MAP_URL);
+//		System.out.println(mArrayListYHD);
 		mValue.totleNum=mArrayListJD.size();
 //		treadQueues = ThreadCarveUtil.Carve(mArrayListJD,ThreadCarveUtil.SIZE);
 		treadQueues = ThreadCarveUtil.Carve(mArrayListJD,ThreadCarveUtil.NUM);
