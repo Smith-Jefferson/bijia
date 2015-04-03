@@ -20,6 +20,10 @@ public class DailyTask extends TimerTask {
 	}
 	@Override
 	public void run() {
+		if(!mValue.getDbState()&&mValue.getmSqlUtil()!=null){
+			mValue.getmSqlUtil().deleteAll(mConstants.JD_TABLE);	//清空数据库
+			mValue.getmSqlUtil().deleteAll(mConstants.YHD_TABLE);
+		}
 		switch(type){
 		case mConstants.JD:
 			mapUrl = mConstants.JD_MAP_URL;

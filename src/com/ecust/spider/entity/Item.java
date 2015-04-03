@@ -14,6 +14,7 @@ public class Item {
 	private String catFirst;		//商品第一级分类（大）
 	private String catSecond;		//商品第二季分类（中）
 	private String catThird;		//商品第二季分类（小）
+	private String brand = "";			//品牌
 	
 	public Item(){					//空构造器
 		
@@ -60,10 +61,16 @@ public class Item {
 			setCatFirst(Catgory.get(0));
 			setCatSecond(Catgory.get(1));
 			break;
+		case 3:
+			setCatFirst(Catgory.get(0));
+			setCatSecond(Catgory.get(1));
+			setCatThird(Catgory.get(2));
+			break;
 		default:
 			setCatFirst(Catgory.get(0));
 			setCatSecond(Catgory.get(1));
 			setCatThird(Catgory.get(2));
+			setBrand(Catgory.get(Catgory.size()-1));
 			break;
 		}
 	}
@@ -147,5 +154,16 @@ public class Item {
 
 	public void setCatThird(String catThird) {
 		this.catThird = catThird;
+	}
+
+	public String getBrand() {
+		if(brand.equals("")){
+			return null;
+		}
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 }

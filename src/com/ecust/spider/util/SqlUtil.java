@@ -34,8 +34,8 @@ public class SqlUtil {
 	}
 	
 	public void addItem(Item item,String table){
-		String sql = "INSERT INTO "+table+"(Iname,Iid,Ihost,Iprice,Ifirst_cat,Isecond_cat,Ithird_cat,Iurl,Iimg_url,Idescription)"
-		  		+ " VALUES('"+item.getName()+"','"+item.getId()+"','"+item.getHost()+"','"+item.getPrice()+"','"+
+		String sql = "INSERT INTO "+table+"(Iname,Iid,Ibrand,Ihost,Iprice,Ifirst_cat,Isecond_cat,Ithird_cat,Iurl,Iimg_url,Idescription)"
+		  		+ " VALUES('"+item.getName()+"','"+item.getId()+"','"+item.getBrand()+"','"+item.getHost()+"','"+item.getPrice()+"','"+
 				item.getCatFirst()+"','"+item.getCatSecond()+"','"+item.getCatThird()
 		  		+"','"+item.getUrl()+"','"+item.getImageUrl()+"','"+item.getDescription()+"')";
 		try {

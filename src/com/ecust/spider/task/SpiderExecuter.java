@@ -22,10 +22,6 @@ public class SpiderExecuter implements Task {
 	
 	@Override
 	public void run() {
-		if(!mValue.getDbState()&&mValue.getmSqlUtil()!=null){
-			mValue.getmSqlUtil().deleteAll(mConstants.JD_TABLE);	//清空数据库
-			mValue.getmSqlUtil().deleteAll(mConstants.YHD_TABLE);
-		}
 		QueueFetcher.fetchQueue(mQueue);
 	}
 
