@@ -20,6 +20,13 @@ public class SpiderTask implements Task {
 	@Override
 	public void run() {
 		dailyTask();
+//		timeTask(12);
+	}
+	private void timeTask(int hour)
+	{
+		long time=hour*60*60*1000;//指定小时运行一次
+		Timer timer = new Timer();
+	    timer.schedule(new DailyTask(type), time);	
 	}
 	
 	private void dailyTask()

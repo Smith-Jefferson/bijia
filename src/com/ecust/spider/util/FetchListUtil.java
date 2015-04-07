@@ -18,7 +18,6 @@ import com.ecust.spider.mValue;
 import com.ecust.spider.entity.Item;
 
 public class FetchListUtil {
-	public static FetchListUtil fetchListUtil=new FetchListUtil();
 	
 	public static final int MAX_INT = 3;
 	
@@ -38,9 +37,10 @@ public class FetchListUtil {
 		}
 		
 		//获取分页的最大页数和分页符号，初始化下一页
-		HashMap<Element, String> nextMap=fetchListUtil.GetMaxpageUrl(doc,pageClass,removeString);
+//		HashMap<Element, String> nextMap=fetchListUtil.GetMaxpageUrl(doc,pageClass,removeString);
 		int Urlend=1;String page="";String nextPage="";
 		try {
+			HashMap<Element, String> nextMap=GetMaxpageUrl(doc,pageClass,removeString);
 			Urlend=Integer.parseInt(nextMap.entrySet().iterator().next().getKey().text().trim());
 			page=nextMap.entrySet().iterator().next().getValue();
 			nextPage=nextMap.entrySet().iterator().next().getKey().absUrl("href");
@@ -50,8 +50,8 @@ public class FetchListUtil {
 		}
 	
 		//循环获取当前页所包含的item地址，获得详情后写入数据库
-		int i=0;
 		int length="http://item.yhd.com/item/".length();
+		try {
 		for(int currentI=2;currentI<=Urlend;currentI++){
 			//调用处理item详情页面的方法
 			while (! itemList.isEmpty()) {
@@ -74,22 +74,19 @@ public class FetchListUtil {
 				
 			}
 			itemList.clear();
-			nextPage=fetchListUtil.GetYhdNextPage(nextPage,page,currentI); 
-			try {
+			nextPage=GetYhdNextPage(nextPage,page,currentI); 
 				itemList=GetItemList(nextPage, null, Listclass);
-			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println("当前分页url获取可能存在问题"+oneListUrl);
-				e.printStackTrace();
-			}
-			
-			
+			} 	
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("当前分页url获取可能存在问题"+oneListUrl);
+			e.printStackTrace();
 		}
 		
 		
 		
 	}
-	public HashMap<Element, String> GetMaxpageUrl(Document doc,Map<String, String>pageclass,String[] removeString){
+	public static HashMap<Element, String> GetMaxpageUrl(Document doc,Map<String, String>pageclass,String[] removeString){
 		Iterator<Entry<String, String>> iterator=pageclass.entrySet().iterator();
 		Elements elements=null;
 		Elements links=null;
@@ -115,7 +112,7 @@ public class FetchListUtil {
 		return nextMap;
 		
 	}
-	public  String GetYhdNextPage(String nextPageUrl,String page,int currentI){
+	public static  String GetYhdNextPage(String nextPageUrl,String page,int currentI){
 		//拼接地址
 				String[] splitString=nextPageUrl.split("-");
 				nextPageUrl="";
@@ -153,15 +150,16 @@ public class FetchListUtil {
 		}
 		
 		//获取分页的最大页数和分页符号，初始化下一页
-		HashMap<Element, String> nextMap=fetchListUtil.GetMaxpageUrl(doc,pageClass,removeString);
+//		HashMap<Element, String> nextMap=GetMaxpageUrl(doc,pageClass,removeString);
 		int Urlend=1;String page="";String nextPage="";
 		try {
+			HashMap<Element, String> nextMap=GetMaxpageUrl(doc,pageClass,removeString);
 			Urlend=Integer.parseInt(nextMap.entrySet().iterator().next().getKey().text().trim());
 			page=nextMap.entrySet().iterator().next().getValue();
 			nextPage=nextMap.entrySet().iterator().next().getKey().absUrl("href");
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("当前页不存在分页");
+			System.out.println("当前页不存在分页"+oneListUrl);
 		}
 		
 		//循环获取当前页所包含的item地址，获得详情后写入数据库
@@ -231,9 +229,15 @@ public class FetchListUtil {
 			//获取item页，总共有多少页
 			doc = Jsoup.connect(oneListUrl).get();
 				doc = Jsoup.connect(oneListUrl).get(); //如果页面没有抓全，重新抓取
-		
+		if(doc==null&&tryTime>=0){
+			System.out.println("解析list："+oneListUrl+"的 DOC 时出错！剩余尝试次数："+tryTime);
+			return Getdoc(oneListUrl,mTryTime);
+		}else if(doc==null){
+			System.out.println("解析list："+oneListUrl+"的 DOC 时出错！");
+		}
 		} catch (Exception e) {
 			if(tryTime>=0){
+				System.out.println("解析list："+oneListUrl+"的时出错！剩余尝试次数："+tryTime);
 				return Getdoc(oneListUrl,mTryTime);
 			}else{
 			System.out.println("解析list："+oneListUrl+"时出错！");
