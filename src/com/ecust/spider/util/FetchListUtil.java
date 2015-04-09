@@ -62,10 +62,16 @@ public class FetchListUtil {
 					if(item==null){
 						continue;
 					}
-					if(mValue.getmSqlUtil()!=null){
-						mValue.getmSqlUtil().addItem(item,mConstants.YHD_TABLE);
-					}else{
-						System.out.print("获取数据库实例失败！");
+					try {
+						if(mValue.getmSqlUtil()!=null){
+							mValue.getmSqlUtil().addItem(item,mConstants.YHD_TABLE);
+						}else{
+							System.out.print("获取数据库实例失败！");
+						}
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.out.println("获取item失败");
+						e.printStackTrace();
 					}
 /*					++i;
 					System.out.println(url+"     "+i);//测试
@@ -172,10 +178,16 @@ public class FetchListUtil {
 					if(item==null){
 						continue;
 					}
+				try {
 					if(mValue.getmSqlUtil()!=null){
 						mValue.getmSqlUtil().addItem(item,mConstants.JD_TABLE);
 					}else{
 						System.out.print("获取数据库实例失败！");
+					}
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.out.println("获取item失败");
+						e.printStackTrace();
 					}
 				}
 				
