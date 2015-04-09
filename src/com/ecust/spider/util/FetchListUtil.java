@@ -239,8 +239,7 @@ public class FetchListUtil {
 		Document doc=null;
 		try {
 			//获取item页，总共有多少页
-			doc = Jsoup.connect(oneListUrl).get();
-				doc = Jsoup.connect(oneListUrl).get(); //如果页面没有抓全，重新抓取
+			doc = Jsoup.connect(oneListUrl).get();//如果页面没有抓全，重新抓取
 		if(doc==null&&tryTime>=0){
 			System.out.println("解析list："+oneListUrl+"的 DOC 时出错！剩余尝试次数："+tryTime);
 			return Getdoc(oneListUrl,mTryTime);
