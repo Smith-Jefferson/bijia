@@ -63,10 +63,16 @@ public class FetchListUtil {
 					if(item==null){
 						continue;
 					}
-					if(mValue.getmSqlUtil()!=null){
-						mValue.getmSqlUtil().addItem(item,mConstants.YHD_TABLE);
-					}else{
-						System.out.print("获取数据库实例失败！");
+					try {
+						if(mValue.getmSqlUtil()!=null){
+							mValue.getmSqlUtil().addItem(item,mConstants.YHD_TABLE);
+						}else{
+							System.out.print("获取数据库实例失败！");
+						}
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.out.println("获取item失败");
+						e.printStackTrace();
 					}
 /*					++i;
 					System.out.println(url+"     "+i);//测试
@@ -179,10 +185,16 @@ public class FetchListUtil {
 					if(item==null){
 						continue;
 					}
+				try {
 					if(mValue.getmSqlUtil()!=null){
 						mValue.getmSqlUtil().addItem(item,mConstants.JD_TABLE);
 					}else{
 						System.out.print("获取数据库实例失败！");
+					}
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.out.println("获取item失败");
+						e.printStackTrace();
 					}
 				}
 				
@@ -238,8 +250,7 @@ public class FetchListUtil {
 		Document doc=null;
 		try {
 			//获取item页，总共有多少页
-			doc = Jsoup.connect(oneListUrl).get();
-				doc = Jsoup.connect(oneListUrl).get(); //如果页面没有抓全，重新抓取
+			doc = Jsoup.connect(oneListUrl).get();//如果页面没有抓全，重新抓取
 		if(doc==null&&tryTime>=0){
 			System.out.println("解析list："+oneListUrl+"的 DOC 时出错！剩余尝试次数："+tryTime);
 			return Getdoc(oneListUrl,mTryTime);
