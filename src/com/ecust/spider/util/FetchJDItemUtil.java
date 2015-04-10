@@ -125,7 +125,7 @@ public class FetchJDItemUtil {
 		String price=null;
 		if(!itemID.isEmpty())
 		{
-			price=new FechUtil().getUrl("http://p.3.cn/prices/get?skuid=J_"+itemID+"&tpye=1");
+			price=new FetchUtil().getUrl("http://p.3.cn/prices/get?skuid=J_"+itemID+"&tpye=1");
 		}
 		
 		if(price.length()>1)

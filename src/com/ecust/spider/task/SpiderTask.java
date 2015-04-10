@@ -1,6 +1,5 @@
 package com.ecust.spider.task;
 
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Queue;
@@ -11,32 +10,36 @@ import com.ecust.spider.api.Task;
 
 public class SpiderTask implements Task {
 	private int type;
-	
-	
-	
-	public SpiderTask(int type){
+
+	public SpiderTask(int type) {
 		this.type = type;
 	}
+
 	@Override
 	public void run() {
-		dailyTask();
-//		timeTask(12);
+		// dailyTask();
+		// timeTask(12);
+		runOnce();
 	}
-	private void timeTask(int hour)
-	{
-		long time=hour*60*60*1000;//指定小时运行一次
+
+	private void runOnce() {
+		new Thread(new DailyTask(type) {
+		}) {
+		}.start();
+	}
+
+	private void timeTask(int hour) {
+		long time = hour * 60 * 60 * 1000;// 指定小时运行一次
 		Timer timer = new Timer();
-	    timer.schedule(new DailyTask(type), time);	
+		timer.schedule(new DailyTask(type), time);
 	}
-	
-	private void dailyTask()
-	{
 
-		int hour=5;
-		int min=0;
-		int sec=0;
+	private void dailyTask() {
 
-		
+		int hour = 5;
+		int min = 0;
+		int sec = 0;
+
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, hour);
 		calendar.set(Calendar.MINUTE, min);
@@ -44,8 +47,8 @@ public class SpiderTask implements Task {
 		Date time = calendar.getTime();
 
 		Timer timer = new Timer();
-		
-	    timer.schedule(new DailyTask(type), time);
 
-		}
+		timer.schedule(new DailyTask(type), time);
+
 	}
+}

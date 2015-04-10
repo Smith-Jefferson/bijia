@@ -88,7 +88,7 @@ public class FetchYHDItemUtil
 		String price=null;
 		if(!itemID.isEmpty())
 		{
-			price=new FechUtil().getUrl("http://gps.yhd.com/restful/detail?mcsite=1&provinceId=1&pmId="+itemID);
+			price=new FetchUtil().getUrl("http://gps.yhd.com/restful/detail?mcsite=1&provinceId=1&pmId="+itemID);
 		}
 		
 		if(price.length()>1)

@@ -22,6 +22,7 @@ public class FetchListUtil {
 	public static final int MAX_INT = 3;
 	
 	public static void ExcuteYhdList(String oneListUrl){
+		try{
 		Document doc=FetchListUtil.Getdoc(oneListUrl,MAX_INT);
 		String[] Listclass={"mod_search_list"};
 		Map<String, String> pageClass=new HashMap<String, String>();
@@ -82,6 +83,11 @@ public class FetchListUtil {
 			System.out.println("当前分页url获取可能存在问题"+oneListUrl);
 			e.printStackTrace();
 		}
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("一号店LIST发生未知错误"+oneListUrl);
+			e.printStackTrace();
+		}
 		
 		
 		
@@ -133,6 +139,7 @@ public class FetchListUtil {
 	}
 	
 	public static void ExcuteJdList(String oneListUrl){
+		try{
 		Document doc=Getdoc(oneListUrl,MAX_INT);
 		String[] Listclass={"goods-list-v1","plist"};
 		Map<String, String> pageClass=new HashMap<String, String>();
@@ -199,7 +206,11 @@ public class FetchListUtil {
 			
 		}
 		
-		
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("京东list发生未知错误 "+oneListUrl);
+			e.printStackTrace();
+		}
 		
 	}
 	public static String GetJdNextPage(String nextPageUrl,String page,int currentI) {

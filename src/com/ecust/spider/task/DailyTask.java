@@ -35,7 +35,7 @@ public class DailyTask extends TimerTask {
 				break;
 		}
 		mArrayList = JsoupUtil.praseArray(mapUrl);
-		mValue.totleNum=mArrayList.size();
+		mValue.totleNum+=mArrayList.size();
 		treadQueues = ThreadCarveUtil.Carve(mArrayList,ThreadCarveUtil.NUM);
 		for (Queue<String> mQueue:treadQueues){
 			System.out.println(mQueue.size());
