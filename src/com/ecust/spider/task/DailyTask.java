@@ -15,33 +15,42 @@ public class DailyTask extends TimerTask {
 	static ArrayList<Queue<String>> treadQueues;
 	private int type;
 	private String mapUrl;
-	public DailyTask(int type){
+
+	public DailyTask(int type) {
 		this.type = type;
 	}
+
 	@Override
 	public void run() {
-		if(!mValue.getDbState()&&mValue.getmSqlUtil()!=null){
-			mValue.getmSqlUtil().deleteAll(mConstants.JD_TABLE);	//清空数据库
+		if (!mValue.getDbState() && mValue.getmSqlUtil() != null) {
+			mValue.getmSqlUtil().deleteAll(mConstants.JD_TABLE); // 清空数据库
 			mValue.getmSqlUtil().deleteAll(mConstants.YHD_TABLE);
 		}
-		switch(type){
+		switch (type) {
 		case mConstants.JD:
 			mapUrl = mConstants.JD_MAP_URL;
 			break;
 		case mConstants.YHD:
-			mapUrl = mConstants.YHD_MAP_URL;	
+			mapUrl = mConstants.YHD_MAP_URL;
 			break;
-			default:
-				break;
+		default:
+			break;
 		}
 		mArrayList = JsoupUtil.praseArray(mapUrl);
-		mValue.totleNum+=mArrayList.size();
-		treadQueues = ThreadCarveUtil.Carve(mArrayList,ThreadCarveUtil.NUM);
-		for (Queue<String> mQueue:treadQueues){
-			System.out.println(mQueue.size());
-			new Thread(new SpiderExecuter(mQueue)
-			{}){}.start();
+		mValue.totleNum += mArrayList.size();
+		mValue.addQueue(mArrayList);
+		for (int i = 0; i < mConstants.THREAD_NUM; i++) {
+			new Thread(new SpiderExecuter() {
+			}) {
+			}.start();
 		}
+		System.out.println(mValue.totalQueue.size());
+		// treadQueues = ThreadCarveUtil.Carve(mArrayList,ThreadCarveUtil.NUM);
+		// for (Queue<String> mQueue:treadQueues){
+		// System.out.println(mQueue.size());
+		// new Thread(new SpiderExecuter(mQueue)
+		// {}){}.start();
+		// }
 	}
 
 }

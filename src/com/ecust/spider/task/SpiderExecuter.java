@@ -12,14 +12,18 @@ import com.ecust.spider.util.QueueFetcher;
 import com.ecust.spider.util.JsoupUtil;
 
 public class SpiderExecuter implements Task {
-	//京东专用爬去线程
-	private static String table=mConstants.JD_TABLE;
+	// 京东专用爬去线程
+	private static String table = mConstants.JD_TABLE;
 	private Queue<String> mQueue;
-	
-	public SpiderExecuter(Queue<String> mQueue){	
+
+	public SpiderExecuter(Queue<String> mQueue) {
 		this.mQueue = mQueue;
 	}
-	
+
+	public SpiderExecuter() {
+		this.mQueue = mValue.totalQueue;
+	}
+
 	@Override
 	public void run() {
 		QueueFetcher.fetchQueue(mQueue);

@@ -1,5 +1,9 @@
 package com.ecust.spider;
 
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Queue;
+
 import com.ecust.spider.util.SqlUtil;
 
 public class mValue {
@@ -10,6 +14,11 @@ public class mValue {
 	public static int threadNo = 0;
 	public static int totleNum = 0;
 	public static int doneNum = 0;
+	public static Queue<String> totalQueue = new LinkedList<String>();
+
+	public static void addQueue(Collection<String> queue) {
+		totalQueue.addAll(queue);
+	}
 
 	public static boolean getDbState() {
 		return dbIsClear;
