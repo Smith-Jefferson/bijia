@@ -10,7 +10,7 @@ public class mConstants {
 	public static final String DB_USER_NAME = "root";
 	public static final String DB_USER_PASS = "root";
 	public static final int THREAD_SIZE = 90;
-	public static final int THREAD_NUM = 2;
+	public static final int THREAD_NUM = 3;
 	public static final int JD = 0;
 	public static final int YHD = 1;
 }

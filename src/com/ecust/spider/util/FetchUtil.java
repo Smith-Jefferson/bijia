@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -34,6 +35,7 @@ public class FetchUtil {
 		try {
 			hc = HttpClients.createDefault();
 			HttpGet hg = new HttpGet(url);
+			hg.addHeader("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2 Googlebot/2.1");
 			HttpResponse response = hc.execute(hg);
 			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				InputStream stream = response.getEntity().getContent();

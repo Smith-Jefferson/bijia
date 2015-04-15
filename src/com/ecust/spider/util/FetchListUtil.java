@@ -8,6 +8,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.naming.InitialContext;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -269,9 +270,15 @@ public class FetchListUtil {
 		int mTryTime = --tryTime;
 
 		Document doc = null;
+		Connection conn = null;
 		try {
 			// 获取item页，总共有多少页
-			doc = Jsoup.connect(oneListUrl).get();// 如果页面没有抓全，重新抓取
+			conn = Jsoup.connect(oneListUrl);
+			conn.header(
+					"User-Agent",
+					"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2 Googlebot/2.1");
+			
+			doc = conn.timeout(200 * 1000).get();// 如果页面没有抓全，重新抓取
 			if (doc == null && tryTime >= 0) {
 				System.out.println("解析list：" + oneListUrl + "的 DOC 时出错！剩余尝试次数："
 						+ tryTime);
