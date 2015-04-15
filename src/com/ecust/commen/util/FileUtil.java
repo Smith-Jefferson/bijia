@@ -1,4 +1,4 @@
-package com.ecust.spider.util;
+package com.ecust.commen.util;
 
 import java.io.File;
 import java.io.FileWriter;

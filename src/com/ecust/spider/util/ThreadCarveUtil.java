@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import com.ecust.spider.mConstants;
+import com.ecust.spider.Constants;
 
 public class ThreadCarveUtil {
 
@@ -26,7 +26,7 @@ public class ThreadCarveUtil {
 
 	public static ArrayList<Queue<String>> carveByNum(ArrayList<String> queue) {
 		ArrayList<Queue<String>> queues = new ArrayList<Queue<String>>();
-		int threadNum = mConstants.THREAD_NUM;
+		int threadNum = Constants.THREAD_NUM;
 		if (queue.size() / threadNum == 0) {
 			Queue<String> tempQueue = new LinkedList<String>(queue);
 			queues.add(tempQueue);
@@ -50,7 +50,7 @@ public class ThreadCarveUtil {
 
 	public static ArrayList<Queue<String>> carveBySize(ArrayList<String> queue) {
 
-		int threadSize = mConstants.THREAD_SIZE;
+		int threadSize = Constants.THREAD_SIZE;
 		ArrayList<Queue<String>> queues = new ArrayList<Queue<String>>();
 		int threadNum = getTreadNum(queue.size(), threadSize);
 		if (threadNum == 1) {

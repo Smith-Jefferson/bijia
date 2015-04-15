@@ -1,6 +1,6 @@
 package com.ecust.spider;
 
-public class mConstants {
+public class Constants {
 	// 此类保存常数
 	public static final String JD_MAP_URL = "http://www.jd.com/allSort.aspx";
 	public static final String YHD_MAP_URL = "http://www.yhd.com/marketing/allproduct.html";

@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Queue;
 import java.util.Timer;
 
-import com.ecust.spider.mConstants;
+import com.ecust.spider.Constants;
 import com.ecust.spider.api.Task;
 
 public class SpiderTask implements Task {
@@ -13,6 +13,8 @@ public class SpiderTask implements Task {
 
 	public SpiderTask(int type) {
 		this.type = type;
+	}
+	public SpiderTask() {
 	}
 
 	@Override
@@ -23,7 +25,7 @@ public class SpiderTask implements Task {
 	}
 
 	private void runOnce() {
-		new Thread(new DailyTask(type) {
+		new Thread(new DailyTask() {
 		}) {
 		}.start();
 	}

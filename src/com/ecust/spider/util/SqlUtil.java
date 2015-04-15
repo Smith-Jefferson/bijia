@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.ecust.spider.mValue;
-import com.ecust.spider.entity.Item;
+import com.ecust.spider.Value;
+import com.ecust.spider.bean.model.Item;
 
 public class SqlUtil {
 
@@ -45,9 +45,9 @@ public class SqlUtil {
 				+ item.getDescription() + "')";
 		try {
 			stmt.execute(sql);
-			System.out.println(++mValue.count +" "+item.getCatgory()+"\t"+item.getName() + "已写入数据库"+"\t"+mValue.doneNum+"/"+mValue.totleNum+"\t"+mValue.errNum);
-			if (mValue.getDbState()) {
-				mValue.setDbState(false);
+			System.out.println(++Value.count +" "+item.getCatgory()+"\t"+item.getName() + "已写入数据库"+"\t"+Value.doneNum+"/"+Value.totleNum+"\t"+Value.errNum);
+			if (Value.getDbState()) {
+				Value.setDbState(false);
 			}
 		} catch (Exception e) {
 			System.out.println("写入数据库出错！");
@@ -77,7 +77,7 @@ public class SqlUtil {
 			stmt.execute(sql);
 			stmt.execute(sql2);
 			System.out.println("数据库已清空！");
-			mValue.setDbState(true);
+			Value.setDbState(true);
 		} catch (Exception e) {
 			System.out.println("删除失败！");
 			e.printStackTrace();

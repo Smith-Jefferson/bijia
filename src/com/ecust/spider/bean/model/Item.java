@@ -1,4 +1,4 @@
-package com.ecust.spider.entity;
+package com.ecust.spider.bean.model;
 
 import java.util.ArrayList;
 

@@ -14,9 +14,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.ecust.spider.mConstants;
-import com.ecust.spider.mValue;
-import com.ecust.spider.entity.Item;
+import com.ecust.spider.Constants;
+import com.ecust.spider.Value;
+import com.ecust.spider.bean.model.Item;
 
 public class JsoupUtil {
 	

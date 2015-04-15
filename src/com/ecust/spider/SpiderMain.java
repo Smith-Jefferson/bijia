@@ -12,8 +12,8 @@ import com.ecust.spider.util.ThreadCarveUtil;
 public class SpiderMain {
 	
 	public static void main(String[] args) {
-		SqlUtil mSqlUtil = new SqlUtil(mConstants.DB_NAME,mConstants.DB_USER_NAME,mConstants.DB_USER_PASS);
-		mValue.setmSqlUtil(mSqlUtil);
+		SqlUtil mSqlUtil = new SqlUtil(Constants.DB_NAME,Constants.DB_USER_NAME,Constants.DB_USER_PASS);
+		Value.setmSqlUtil(mSqlUtil);
 		
 //		System.getProperties().put("http.proxySet","ture");
 //		System.getProperties().put("http.proxyHost","192.168.10.20");
@@ -21,11 +21,14 @@ public class SpiderMain {
 //		System.getProperties().put("http.proxyHosts","localhost|127.0.0.1");
 
 		
-		new Thread(new SpiderTask(mConstants.JD)
-		{}){}.start();
-		
-//		new Thread(new SpiderTask(mConstants.YHD)
+//		new Thread(new SpiderTask(Constants.JD)
 //		{}){}.start();
+//		
+//		new Thread(new SpiderTask(Constants.YHD)
+//		{}){}.start();
+		
+		new Thread(new SpiderTask()
+		{}){}.start();
 		
 	}
 }

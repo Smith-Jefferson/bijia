@@ -6,7 +6,7 @@ import java.util.Queue;
 
 import com.ecust.spider.util.SqlUtil;
 
-public class mValue {
+public class Value {
 	// 此类保存运行状态
 	private static boolean dbIsClear = false; // 数据库是否清空
 	private static SqlUtil mSqlUtil;
@@ -26,7 +26,7 @@ public class mValue {
 	}
 
 	public static void setDbState(boolean dbIsClear) {
-		mValue.dbIsClear = dbIsClear;
+		Value.dbIsClear = dbIsClear;
 	}
 
 	public static SqlUtil getmSqlUtil() {
@@ -34,7 +34,7 @@ public class mValue {
 	}
 
 	public static void setmSqlUtil(SqlUtil mSqlUtil) {
-		mValue.mSqlUtil = mSqlUtil;
+		Value.mSqlUtil = mSqlUtil;
 	}
 
 }
