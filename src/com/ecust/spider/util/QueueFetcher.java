@@ -12,12 +12,8 @@ public class QueueFetcher {
 		if (Value.getDbState()) {
 			while (!mQueue.isEmpty()) {
 				String url = mQueue.poll();
-				if (!BloomFilter.ifNotContainsSet(url)) {
-					ListFetcherFactory.getListFetcher(url).ExcuteList(url);
-					System.out.println(++Value.doneNum + "/" + Value.totleNum);
-				} else {
-					System.out.println("Bloom错误！");
-				}
+				ListFetcherFactory.getListFetcher(url).ExcuteList(url);
+				System.out.println(++Value.doneNum + "/" + Value.totleNum);
 			}
 		} else {
 			System.out.println("数据库未清空！");

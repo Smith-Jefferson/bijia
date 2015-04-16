@@ -1,6 +1,7 @@
 package com.ecust.spider.task;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Queue;
 import java.util.TimerTask;
 
@@ -11,7 +12,7 @@ import com.ecust.spider.util.ThreadCarveUtil;
 
 public class DailyTask extends TimerTask {
 
-	static ArrayList<String> mArrayList;
+	static HashSet<String> mHashSet;
 	static ArrayList<Queue<String>> treadQueues;
 	private int type;
 	private String mapUrl;
@@ -41,9 +42,9 @@ public class DailyTask extends TimerTask {
 	}
 
 	private void addMapToQueue(String map) {
-		mArrayList = JsoupUtil.praseArray(map);
-		Value.totleNum += mArrayList.size();
-		Value.addQueue(mArrayList);
+		mHashSet = JsoupUtil.praseArray(map);
+		Value.totleNum += mHashSet.size();
+		Value.addQueue(mHashSet);
 	}
 
 }

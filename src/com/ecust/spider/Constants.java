@@ -13,4 +13,6 @@ public class Constants {
 	public static final int THREAD_NUM = 3;
 	public static final int JD = 0;
 	public static final int YHD = 1;
+	public static final String JD_BLOOM = "<>";
+	public static final String YHD_BLOOM = "<>";
 }

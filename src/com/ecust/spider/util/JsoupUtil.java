@@ -3,6 +3,7 @@ package com.ecust.spider.util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -55,11 +56,11 @@ public class JsoupUtil {
 		return mQueue;
 	}
 
-	public static ArrayList<String> praseArray(String url) {
+	public static HashSet<String> praseArray(String url) {
 		if (url.equals(Constants.YHD_MAP_URL)) {
 			return praseYHDArray(url);
 		}
-		ArrayList<String> mQueue = new ArrayList<String>();
+		HashSet<String> mQueue = new HashSet<String>();
 		try {
 			Document doc = Jsoup.connect(url).get();
 			Elements lists = doc.getElementsByClass("mc");
@@ -76,8 +77,8 @@ public class JsoupUtil {
 		return mQueue;
 	}
 
-	private static ArrayList<String> praseYHDArray(String url) {
-		ArrayList<String> mQueue = new ArrayList<String>();
+	private static HashSet<String> praseYHDArray(String url) {
+		HashSet<String> mQueue = new HashSet<String>();
 		try {
 			Document doc = Jsoup.connect(url).get();
 			Elements lists = doc.getElementsByTag("em");
@@ -95,8 +96,8 @@ public class JsoupUtil {
 	}
 
 	public static void main(String[] args) {
-		ArrayList<String> mArrayList = praseYHDArray("http://www.yhd.com/marketing/allproduct.html");
-		System.out.print(mArrayList);
+//		ArrayList<String> mArrayList = praseYHDArray("http://www.yhd.com/marketing/allproduct.html");
+//		System.out.print(mArrayList);
 	}
 
 }
