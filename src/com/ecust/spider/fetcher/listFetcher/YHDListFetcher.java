@@ -26,6 +26,7 @@ public class YHDListFetcher extends ListFetcher {
 		excuteGeneralList(oneListUrl, Listclass, pageClass, Constants.YHD,
 				length);
 	}
+	
 
 	@Override
 	public String GetNextPage(String nextPageUrl, String page, int currentI) {

@@ -16,6 +16,7 @@ import com.ecust.spider.util.BloomFilter;
 
 public class JDListFetcher extends ListFetcher {
 
+
 	@Override
 	public void ExcuteList(String oneListUrl) {
 		String[] Listclass = { "goods-list-v1", "plist" };

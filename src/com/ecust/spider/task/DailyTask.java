@@ -29,16 +29,7 @@ public class DailyTask extends TimerTask {
 			Value.getmSqlUtil().deleteAll(Constants.JD_TABLE); // 清空数据库
 			Value.getmSqlUtil().deleteAll(Constants.YHD_TABLE);
 		}
-//		switch (type) {
-//		case Constants.JD:
-//			mapUrl = Constants.JD_MAP_URL;
-//			break;
-//		case Constants.YHD:
-//			mapUrl = Constants.YHD_MAP_URL;
-//			break;
-//		default:
-//			break;
-//		}
+
 		addMapToQueue(Constants.JD_MAP_URL);
 		addMapToQueue(Constants.YHD_MAP_URL);
 		for (int i = 0; i < Constants.THREAD_NUM; i++) {
