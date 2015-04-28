@@ -59,7 +59,10 @@ public class JsoupUtil {
 	public static HashSet<String> praseArray(String url) {
 		if (url.equals(Constants.YHD_MAP_URL)) {
 			return praseYHDArray(url);
+		}else if (url.equals(Constants.SN_MAP_URL)) {
+			return praseSNArray(url);
 		}
+		
 		HashSet<String> mQueue = new HashSet<String>();
 		try {
 			Document doc = Jsoup.connect(url).get();
@@ -85,6 +88,23 @@ public class JsoupUtil {
 			Elements links = lists.select("span").select("a[href]");
 			for (Element link : links) {
 				if (link.attr("abs:href").startsWith("http://list.yhd.com")) {
+					mQueue.add(link.attr("abs:href"));
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mQueue;
+	}
+	
+	private static HashSet<String> praseSNArray(String url) {
+		HashSet<String> mQueue = new HashSet<String>();
+		try {
+			Document doc = Jsoup.connect(url).get();
+			Elements links = doc.select("span").select("a.searchCity").select("a[href]");
+			for (Element link : links) {
+				if (link.attr("abs:href").startsWith("http://list.suning.com")) {
 					mQueue.add(link.attr("abs:href"));
 				}
 			}
