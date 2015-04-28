@@ -22,6 +22,7 @@ import com.ecust.spider.util.ListFilter;
 
 public abstract class ListFetcher {
 	protected static final int MAX_TRY = 3;
+	protected String table = "";
 
 	public abstract void ExcuteList(String oneListUrl);
 
@@ -30,6 +31,19 @@ public abstract class ListFetcher {
 
 	protected void excuteGeneralList(String oneListUrl, String[] Listclass,
 			Map<String, String> pageClass, int type, int length) {
+		switch (type) {
+		case Constants.JD:
+			table = Constants.JD_TABLE;
+			break;
+		case Constants.YHD:
+			table = Constants.YHD_TABLE;
+			break;
+		case Constants.SN:
+			table = Constants.SN_TABLE;
+			break;
+		default:
+			break;
+		}
 		try {
 			Document doc = Getdoc(oneListUrl, MAX_TRY);
 			String[] removeString = { "页", ".", "确定" };
@@ -77,7 +91,7 @@ public abstract class ListFetcher {
 						try {
 							if (Value.getmSqlUtil() != null) {
 								Value.getmSqlUtil().addItem(item,
-										Constants.JD_TABLE);
+										table);
 							} else {
 								System.out.print("获取数据库实例失败！");
 							}

@@ -16,7 +16,7 @@ public class ListFetcherFactory {
 			return new JDListFetcher();
 		} else if (oneListUrl.contains(YHD)) {
 			return new YHDListFetcher();
-		} else if (oneListUrl.contains(YHD)) {
+		} else if (oneListUrl.contains(SN)) {
 			return new SNListFetcher();
 		} else {
 			System.out.println("暂时还无法处理的网站");
