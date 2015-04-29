@@ -4,6 +4,7 @@ package com.ecust.spider;
 import java.util.ArrayList;
 import java.util.Queue;
 
+import com.ecust.spider.task.DailyTask;
 import com.ecust.spider.task.SpiderTask;
 import com.ecust.spider.util.JsoupUtil;
 import com.ecust.spider.util.SqlUtil;
@@ -27,7 +28,7 @@ public class SpiderMain {
 //		new Thread(new SpiderTask(Constants.YHD)
 //		{}){}.start();
 		
-		new Thread(new SpiderTask()
+		new Thread(new DailyTask()
 		{}){}.start();
 		
 	}

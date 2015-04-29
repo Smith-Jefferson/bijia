@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 public class ListFilter {
 	public final static int LIST =0;
 	public final static int ITEM =1;
+	public final static int product =2;
 	private static Pattern pattern;
 //	public static LinkedHashMap<String, String> map2 =new LinkedHashMap<String, String>();
 	
@@ -22,6 +23,9 @@ public class ListFilter {
 
 		else if (type==ITEM) {
 			 pattern=Pattern.compile("^(http://item|https://item|item){1}[\\w\\.\\-/:]+");
+		}
+		else if (type==product) {
+			pattern=Pattern.compile("^(http://product|https://product|product){1}[\\w\\.\\-/:]+");
 		}
 		LinkedHashMap<String, String> maplist=new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> list=map.entrySet().iterator();
@@ -47,6 +51,9 @@ public class ListFilter {
 			break;
 		case ITEM:
 			pattern = Pattern.compile("^(http://item|https://item|item){1}[\\w\\.\\-/:]+");
+			break;
+		case product:
+			pattern=Pattern.compile("^(http://product|https://product|product){1}[\\w\\.\\-/:]+");
 			break;
 		default :
 			pattern = null;

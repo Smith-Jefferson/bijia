@@ -2,24 +2,16 @@ package com.ecust.spider.fetcher.listFetcher;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.LinkedBlockingQueue;
-
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 import com.ecust.spider.Constants;
-import com.ecust.spider.Value;
 import com.ecust.spider.api.ListFetcher;
-import com.ecust.spider.bean.model.Item;
-import com.ecust.spider.fetcher.itemFetcher.JDItemFetcher;
-import com.ecust.spider.util.BloomFilter;
 
 public class JDListFetcher extends ListFetcher {
 
 
 	@Override
 	public void ExcuteList(String oneListUrl) {
-		String[] Listclass = { "goods-list-v1", "plist" };
+		String[] Listclass = {"div#plist&div.p-name","div.goods-list-v1&div.p-name","div.plist&div.p-name" };
 		Map<String, String> pageClass = new HashMap<String, String>();
 		pageClass.put("p-num", "page=");
 		pageClass.put("pagin", "p=");

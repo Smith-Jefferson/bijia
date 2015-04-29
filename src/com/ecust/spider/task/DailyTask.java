@@ -32,8 +32,8 @@ public class DailyTask extends TimerTask {
 			Value.getmSqlUtil().deleteAll(Constants.SN_TABLE);
 		}
 
-		addMapToQueue(Constants.JD_MAP_URL);
-		addMapToQueue(Constants.YHD_MAP_URL);
+		//addMapToQueue(Constants.JD_MAP_URL);
+		//addMapToQueue(Constants.YHD_MAP_URL);
 		addMapToQueue(Constants.SN_MAP_URL);
 		for (int i = 0; i < Constants.THREAD_NUM; i++) {
 			new Thread(new SpiderExecuter() {
