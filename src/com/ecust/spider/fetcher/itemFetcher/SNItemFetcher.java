@@ -92,17 +92,20 @@ public class SNItemFetcher extends ItemFetcher {
 	public ArrayList<String> getItemCategory(Element doc) {
 		// TODO Auto-generated method stub
 		Elements categoryInfo=doc.select("div.breadcrumb").select("a#category1");
-		String[] category=null;
+	
 		ArrayList<String> categoryList=new ArrayList<String>();
 		if(categoryInfo.size()!=0)
 		{
-			category=categoryInfo.text().split("/");
-			for(String str: category)
+			categoryList.add(categoryInfo.text());
+
+		}
+		categoryInfo=doc.select("div.breadcrumb").select("div.dropdown").select("span.dropdown-text");
+		if(categoryInfo.size()!=0)
+		{
+			for(Element element:categoryInfo)
 			{
-				categoryList.add(str);
+				categoryList.add(element.text());
 			}
-			
-			return categoryList;
 		}
 		return categoryList;
 	}
@@ -114,9 +117,14 @@ public class SNItemFetcher extends ItemFetcher {
 		{
 			detailInfo=doc.select("div.bookcon-main").select("dl#bookCon_1").select("li");
 		}
+		if(detailInfo.size()==0)
+		{
+			detailInfo=doc.select("div#J-procon-param").select("div.procon-param").select("table#itemParameter").select("td.val");
+		}
 		String detailStr=null;
 		for(Element element: detailInfo)
 		{
+			
 			if(detailStr==null)
 			{
 				detailStr=element.text();
