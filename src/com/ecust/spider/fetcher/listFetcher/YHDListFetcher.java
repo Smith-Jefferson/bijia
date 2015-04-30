@@ -11,7 +11,7 @@ public class YHDListFetcher extends ListFetcher {
 	@Override
 	public void ExcuteList(String oneListUrl) {
 
-		String[] Listclass = { "div.mod_search_list&p.title ","div#itemSearchList&p.title" };
+		String[] Listclass = { "div.mod_search_list&p.title ","div#itemSearchList&p.title","div#itemSearchList&a.search_prod_img","div#itemSearchList&p.proName" };
 		Map<String, String> pageClass = new HashMap<String, String>();
 		pageClass.put("turn_page", "p");
 		int length = "http://item.yhd.com/item/".length();

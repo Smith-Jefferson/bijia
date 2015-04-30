@@ -1,5 +1,6 @@
 package com.ecust.spider.api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -22,7 +23,6 @@ import com.ecust.spider.util.ListFilter;
 public abstract class ListFetcher {
 	protected static final int MAX_TRY = 3;
 	protected String table = "";
-
 	public abstract void ExcuteList(String oneListUrl);
 
 	public abstract String GetNextPage(String nextPageUrl, String page,
@@ -78,11 +78,12 @@ public abstract class ListFetcher {
 			// 循环获取当前页所包含的item地址，获得详情后写入数据库
 			for (int currentI = 2; currentI <= Urlend; currentI++) {
 				// 调用处理item详情页面的方法
-				for (Iterator<String> itemurl=itemList.iterator();itemurl.hasNext();) {
+				for (Iterator<String> itemurl = itemList.iterator(); itemurl
+						.hasNext();) {
 					String url = itemurl.next();
 					if (!BloomFilter.ifNotContainsSet(url)
 							&& url.length() > length) {
-						//System.out.println(url);
+						// System.out.println(url);
 						Item item = ItemFetcherFactory.getItemFetcher(type)
 								.getItemInfo(url);
 						if (item == null) {
@@ -90,8 +91,7 @@ public abstract class ListFetcher {
 						}
 						try {
 							if (Value.getmSqlUtil() != null) {
-								Value.getmSqlUtil().addItem(item,
-										table);
+								Value.getmSqlUtil().addItem(item, table);
 							} else {
 								System.out.print("获取数据库实例失败！");
 							}
@@ -100,7 +100,7 @@ public abstract class ListFetcher {
 							System.out.println("获取item失败");
 							e.printStackTrace();
 						}
-						
+
 					}
 
 				}
@@ -192,49 +192,49 @@ public abstract class ListFetcher {
 		return doc;
 	}
 
-	protected HashSet<String> GetItemList(String url,
-			Document document, String[] classString) {
+	protected HashSet<String> GetItemList(String url, Document document,
+			String[] classString) {
 		HashSet<String> Itemlist = new HashSet<String>();
 		try {
-				Document doc = null;
-				if (document == null) {
-					doc = Getdoc(url, MAX_TRY);
-				} else {
-					doc = document;
-				}
-				Elements links = null;
+			Document doc = null;
+			if (document == null) {
+				doc = Getdoc(url, MAX_TRY);
+			} else {
+				doc = document;
+			}
+			Elements links = null;
 			for (int j = 0; j < classString.length; j++) {
-				try{
-					String[] sep=classString[j].split("&");
-					for(int temp=0;temp<sep.length;temp++){
-						if(temp==0){
-						links = doc.select(sep[temp]);}
-						else{
-							links=links.select(sep[temp]);
+				try {
+					String[] sep = classString[j].split("&");
+					for (int temp = 0; temp < sep.length; temp++) {
+						if (temp == 0) {
+							links = doc.select(sep[temp]);
+						} else {
+							links = links.select(sep[temp]);
 						}
 					}
 					links = links.select("a[href]");
-				}
-				catch(Exception e){
+				} catch (Exception e) {
 					System.out.println("我也不知道发生了什么神奇的错误...");
 					e.printStackTrace();
 				}
 				if (links != null && !links.isEmpty()) {
 					break;
-					}
 				}
-				if (links == null || links.isEmpty()) {
-					links = doc.select("a[href]");
-					System.out.println("当前页面"+url+"获取不全");
+			}
+			if (links == null || links.isEmpty()) {
+				links = doc.select("a[href]");
+				System.out.println("当前页面" + url + "获取不全");
+			}
+			for (Element link : links) {
+				if (ListFilter.UrlJudge(link.attr("abs:href"),
+						ListFilter.product) ||ListFilter.UrlJudge(link.attr("abs:href"),
+								ListFilter.ITEM)) {
+					Itemlist.add(link.attr("abs:href"));
 				}
-				for (Element link : links) {
-					if (ListFilter.UrlJudge(link.attr("abs:href"), ListFilter.product)) {
-						Itemlist.add(link.attr("abs:href"));
-					}
-				}
+			}
 			// System.out.println(Itemlist.toString());
-			} 
-			catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
