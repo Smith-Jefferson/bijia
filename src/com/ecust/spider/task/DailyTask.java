@@ -8,7 +8,6 @@ import java.util.TimerTask;
 import com.ecust.spider.Constants;
 import com.ecust.spider.Value;
 import com.ecust.spider.util.JsoupUtil;
-import com.ecust.spider.util.ThreadCarveUtil;
 
 public class DailyTask extends TimerTask {
 

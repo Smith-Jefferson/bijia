@@ -1,14 +1,8 @@
 package com.ecust.spider;
 
 
-import java.util.ArrayList;
-import java.util.Queue;
-
 import com.ecust.spider.task.DailyTask;
-import com.ecust.spider.task.SpiderTask;
-import com.ecust.spider.util.JsoupUtil;
 import com.ecust.spider.util.SqlUtil;
-import com.ecust.spider.util.ThreadCarveUtil;
 
 public class SpiderMain {
 	

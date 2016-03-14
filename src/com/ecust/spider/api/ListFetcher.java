@@ -1,6 +1,5 @@
 package com.ecust.spider.api;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;

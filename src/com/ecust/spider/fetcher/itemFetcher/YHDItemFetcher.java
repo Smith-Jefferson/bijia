@@ -2,17 +2,14 @@ package com.ecust.spider.fetcher.itemFetcher;
 
 import java.util.ArrayList;
 
-import net.sf.json.JSONObject;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.ecust.commen.util.FetchUtil;
-import com.ecust.spider.Value;
 import com.ecust.spider.api.ItemFetcher;
 import com.ecust.spider.bean.model.Item;
+
+import net.sf.json.JSONObject;
 
 public class YHDItemFetcher extends ItemFetcher {
 	@Override

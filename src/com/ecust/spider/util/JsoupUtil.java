@@ -1,13 +1,8 @@
 package com.ecust.spider.util;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.jsoup.Jsoup;
@@ -16,8 +11,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.ecust.spider.Constants;
-import com.ecust.spider.Value;
-import com.ecust.spider.bean.model.Item;
 
 public class JsoupUtil {
 

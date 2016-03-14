@@ -23,10 +23,10 @@ public class SNListFetcher extends ListFetcher {
 	public String GetNextPage(String nextPageUrl, String page, int currentI) {
 		try {
 			String[] splitString = nextPageUrl.split("-");
-			nextPageUrl = "";
 			currentI=currentI-1;
 			int num=Integer.parseInt(page);
 			if(nextPageUrl.contains("cityId")){
+				nextPageUrl = "";
 				String[] jsonStrings=splitString[splitString.length-1].split("&");
 				ArrayList<String> jsonNumber=new ArrayList<String>() ;
 				for (String string : jsonStrings) {
@@ -47,6 +47,7 @@ public class SNListFetcher extends ListFetcher {
 				nextPageUrl += ".html";
 			}
 			else {
+				nextPageUrl = "";
 				for (int i = 0; i < splitString.length-1; i++) {
 					if(i==num){
 						nextPageUrl += currentI + "-";
